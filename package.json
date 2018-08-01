@@ -4,8 +4,12 @@
   "description": "Microservice to manage image uploads for jr-site",
   "main": "bin/www",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
   },
   "author": "Joshua Mora",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }

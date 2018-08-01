@@ -1,0 +1,9 @@
+const app = require('../app')
+
+const port = process.env.JR_SITE_IMAGES_SERVICE_PORT || 3010
+
+const server = app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
+})
+
+module.exports = port // for testing
