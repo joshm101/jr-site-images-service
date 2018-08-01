@@ -1,0 +1,11 @@
+{
+  "name": "jr-site-images-service",
+  "version": "1.0.0",
+  "description": "Microservice to manage image uploads for jr-site",
+  "main": "bin/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Mora",
+  "license": "ISC"
+}
