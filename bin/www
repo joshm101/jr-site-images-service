@@ -1,6 +1,12 @@
 const app = require('../app')
+const validEnv = require('./utils/valid-env')
 
 const port = process.env.JR_SITE_IMAGES_SERVICE_PORT || 3010
+
+if (!validEnv()) {
+  console.log('Invalid environment configuration. Exiting.')
+  process.exit(1)
+}
 
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`)
