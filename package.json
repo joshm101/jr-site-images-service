@@ -4,8 +4,9 @@
   "description": "Microservice to manage image uploads for jr-site",
   "main": "bin/www",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "test": "cross-env NODE_ENV=test npm run exec-mocha",
+    "start": "node ./bin/www",
+    "exec-mocha": "mocha \"./utils/**/test.js\""
   },
   "author": "Joshua Mora",
   "license": "ISC",
@@ -14,12 +15,14 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "cross-env": "^5.2.0",
     "eslint": "^5.2.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0"
+    "eslint-plugin-standard": "^3.1.0",
+    "mocha": "^5.2.0"
   }
 }
