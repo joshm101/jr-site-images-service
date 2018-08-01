@@ -10,7 +10,8 @@
   "author": "Joshua Mora",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "eslint": "^5.2.0",
