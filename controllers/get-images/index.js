@@ -3,7 +3,7 @@ const aws = require('aws-sdk')
 const s3 = new aws.S3()
 
 const BUCKET_NAME = process.env.JR_SITE_S3_BUCKET_NAME
-const ROOT_URL = 'https://s3.us-east-2.amazonaws.com'
+const ROOT_URL = 'https://s3.us-east-2.amazonaws.com/jr-site-image-storage'
 
 const getImages = (req, res) => {
   const s3Params = {
