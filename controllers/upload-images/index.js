@@ -55,18 +55,38 @@ const onFileSendResult = (
 }
 
 /**
+ * Constructs a final S3 filename string from the
+ * provided parameters.
+ * @param {string} filename - Normalized filename
+ * @param {string} extension - Extension of file
+ * @param {string} folder - Optional "folder" to place
+ * file in on S3
+ * @return {string} - Final filename/location
+ */
+const constructFinalFilename = (filename, extension, folder) => {
+  if (!folder) {
+    return `${filename}${extension}`
+  }
+
+  return `${folder}/${filename}${extension}`
+}
+
+/**
  * Attempts to send a file uploaded to this server to
  * S3 for storage
  * @param {object} fileObject - Multer file object
+ * @param {string} folder - "folder" to place current file in
  * @return {Promise<object>} - File send Promise result
  */
-const sendFileToS3 = (fileObject) => {
+const sendFileToS3 = (fileObject, folder) => {
   const { originalname, buffer, mimetype } = fileObject
   const filenameData = isolateFilenameData(originalname)
 
   const { extension } = filenameData
   const normalizedName = normalizeFilename(filenameData.name)
-  const finalFilename = `${normalizedName}${extension}`
+  const finalFilename = constructFinalFilename(
+    normalizedName, extension, folder
+  )
 
   const s3Params = {
     Bucket: BUCKET_NAME,
@@ -98,6 +118,7 @@ const sendFileToS3 = (fileObject) => {
  */
 const uploadImages = (req, res) => {
   const { files } = req
+  const { folder } = req.body
 
   // get any invalid files that were provided
   const invalidFiles = files.filter(file =>
@@ -119,7 +140,7 @@ const uploadImages = (req, res) => {
   Promise.all(
     // Map over each valid file and attempt to send to S3
     validFiles.map(file =>
-      sendFileToS3(file)
+      sendFileToS3(file, folder)
     )
   ).then((results) => {
     // Process the results of sending all files to S3
