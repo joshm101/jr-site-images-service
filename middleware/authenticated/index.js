@@ -25,21 +25,23 @@ const authenticated = (req, res, next) => {
   }
 
   const requestOptions = {
-    uri: USERS_SERVICE_URI,
+    uri: `http://${USERS_SERVICE_URI}:3005/api/token-valid`,
     headers: {
       Authorization: `Bearer: ${token}`
     }
   }
 
-  requestPromise(requestOptions).then((res) => {
-    if (res.data) {
-      // res.data is truthy, token is valid
+  requestPromise(requestOptions).then((response) => {
+    const authResponse = JSON.parse(response)
+    if (authResponse.data) {
+      // serviceResponse.data is truthy, token is valid
       next()
       return
     }
 
-    // res.data is falsy, auth token is invalid. Requester
-    // is not authorized to upload images.
+    // authResponse.data is falsy, auth token is
+    // invalid. Requester is not authorized to
+    // upload images.
     res.status(401).send({
       message: 'Auth token invalid; not authorized to upload images.'
     })
