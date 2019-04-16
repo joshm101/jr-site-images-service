@@ -4,7 +4,6 @@ const upload = multer()
 
 const uploadImages = require('../../controllers/upload-images')
 const getImages = require('../../controllers/get-images')
-const authenticated = require('../../middleware/authenticated')
 
 const apiRouter = express.Router()
 
@@ -16,7 +15,7 @@ const root = (req, res) => {
 
 apiRouter.post(
   '/upload-images',
-  [authenticated, upload.array('images'), uploadImages]
+  [upload.array('images'), uploadImages]
 )
 apiRouter.get('/get-images', getImages)
 apiRouter.get('/', root)
