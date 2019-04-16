@@ -3,11 +3,6 @@
  * are set. False otherwise.
  */
 const validEnv = () => {
-  if (!process.env.JR_SITE_USERS_SERVICE_URI) {
-    console.error('Users service URI not provided.')
-    return false
-  }
-
   if (!process.env.JR_SITE_S3_BUCKET_NAME) {
     console.error('S3 bucket name not provided.')
     return false
