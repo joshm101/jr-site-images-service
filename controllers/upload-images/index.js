@@ -4,13 +4,13 @@ const validImageFile = require('../../utils/valid-image-file')
 
 const {
   JR_SITE_S3_BUCKET_NAME,
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY
+  JR_SITE_AWS_ACCESS_KEY_ID,
+  JR_SITE_AWS_SECRET_ACCESS_KEY
 } = process.env
 
 const s3 = new aws.S3({
-  accessKeyId: AWS_ACCESS_KEY_ID,
-  secretAccessKey: AWS_SECRET_ACCESS_KEY
+  accessKeyId: JR_SITE_AWS_ACCESS_KEY_ID,
+  secretAccessKey: JR_SITE_AWS_SECRET_ACCESS_KEY
 })
 
 /**
