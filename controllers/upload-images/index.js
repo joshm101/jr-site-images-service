@@ -1,11 +1,17 @@
 const aws = require('aws-sdk')
-
-const s3 = new aws.S3()
-
 const normalizeFilename = require('../../utils/normalize-filename')
 const validImageFile = require('../../utils/valid-image-file')
 
-const BUCKET_NAME = process.env.JR_SITE_S3_BUCKET_NAME
+const {
+  JR_SITE_S3_BUCKET_NAME,
+  JR_SITE_AWS_ACCESS_KEY_ID,
+  JR_SITE_AWS_SECRET_ACCESS_KEY
+} = process.env
+
+const s3 = new aws.S3({
+  accessKeyId: JR_SITE_AWS_ACCESS_KEY_ID,
+  secretAccessKey: JR_SITE_AWS_SECRET_ACCESS_KEY
+})
 
 /**
  * Isolates user-defined filename and file extension
@@ -89,11 +95,11 @@ const sendFileToS3 = (fileObject, folder) => {
   )
 
   const s3Params = {
-    Bucket: BUCKET_NAME,
+    Bucket: JR_SITE_S3_BUCKET_NAME,
     Key: finalFilename,
     Body: buffer,
     ContentType: mimetype,
-    ACL: 'public-read'
+    ACL: 'private'
   }
 
   // Wrap result in a Promise for easier success/error handling
