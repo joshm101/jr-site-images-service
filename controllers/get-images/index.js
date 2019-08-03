@@ -1,7 +1,5 @@
 const aws = require('aws-sdk')
 
-const ROOT_URL = 'https://s3.us-east-2.amazonaws.com/jr-site-image-storage'
-
 const {
   JR_SITE_S3_BUCKET_NAME,
   JR_SITE_AWS_ACCESS_KEY_ID,
@@ -13,6 +11,7 @@ const s3 = new aws.S3({
   secretAccessKey: JR_SITE_AWS_SECRET_ACCESS_KEY
 })
 
+const ROOT_URL = `https://s3.us-east-2.amazonaws.com/${JR_SITE_S3_BUCKET_NAME}`
 
 const getImages = (req, res) => {
   const s3Params = {
