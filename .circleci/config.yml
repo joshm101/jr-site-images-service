@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:10.16
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -26,7 +26,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
 
       - save_cache:
           paths:
@@ -37,7 +40,7 @@ jobs:
       - run:
           name: Build & push Docker image
           command: |
-            docker build -t jr-site-images-service .
+            docker build -t jshm101/jr-site-images:dev .
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
             docker push jshm101/jr-site-images:dev
   deploy:
