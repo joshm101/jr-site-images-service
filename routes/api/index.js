@@ -14,10 +14,10 @@ const root = (req, res) => {
 }
 
 apiRouter.post(
-  '/upload-images',
+  '/images/upload',
   [upload.array('images'), uploadImages]
 )
-apiRouter.get('/get-images', getImages)
+apiRouter.get('/images', getImages)
 apiRouter.get('/', root)
 
 module.exports = apiRouter
